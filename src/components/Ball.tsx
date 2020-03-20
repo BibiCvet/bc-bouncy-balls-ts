@@ -7,6 +7,7 @@ type Props = {
 type State = {
   x: number,
   y: number,
+  angle: number,
 };
 
 class Ball extends Component<Props, State> {
@@ -16,11 +17,12 @@ class Ball extends Component<Props, State> {
     this.state = {
       x: this.props.currentBall.initX,
       y: this.props.currentBall.initY,
+      angle: this.props.currentBall.angle,
     };
   }
 
   componentDidMount() {
-    const offset = 5;
+    const offsetY = 5;
     const ballSize = 20;
     const root = document.getElementById("mainContainer");
     let lastXCoeff = 2;
@@ -28,12 +30,12 @@ class Ball extends Component<Props, State> {
 
     setInterval(() => {
       // Recalculate the x,y values of the ball
-      const x = this.state.x + lastXCoeff * offset;
-      let y = this.state.y + lastYCoeff * offset;
+      const x = this.state.x + lastXCoeff * this.state.angle;
+      let y = this.state.y + lastYCoeff * offsetY;
       //if it reaches the top 
       if (root && (y + ballSize > root.offsetHeight || y <= 0)) {
         lastYCoeff = -lastYCoeff;
-        y = this.state.y + lastYCoeff * offset;
+        y = this.state.y + lastYCoeff * offsetY;
       }
       this.setState({ x, y });
       // the change of interval will change the speed of the ball
@@ -42,7 +44,7 @@ class Ball extends Component<Props, State> {
 
   render() {
     const spanStyle = {
-      transform: "translate(" + this.state.x + "px, " + this.state.y + "px)",
+      transform: "translate(" + this.state.x + "px, " + this.state.y + "px )",
       backgroundColor: this.props.currentBall.color
     };
 

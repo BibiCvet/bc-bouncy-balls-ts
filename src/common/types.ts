@@ -3,4 +3,5 @@ export type BouncyBall = {
     initY: number,
     color: string,
     speed: number,
+    angle: number,
   };

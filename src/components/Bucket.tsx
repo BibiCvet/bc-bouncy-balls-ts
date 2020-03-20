@@ -12,17 +12,18 @@ class Bucket extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    const initialBalls = [{color:"red", speed:(randomIntFromInterval(50, 300)), initX:100, initY:50},
-    {color:"white", speed:(randomIntFromInterval(50, 300)), initX:0, initY:150}, ];
+    const initialBalls = [{color:"red", speed:(randomIntFromInterval(50, 300)), initX:100, initY:50, angle: 9},
+    {color:"white", speed:(randomIntFromInterval(50, 300)), initX:0, initY:150, angle: 5}, ];
     this.state = {
       bouncyBalls: initialBalls,
     };
   }
-  
+
   addBall = (e: React.MouseEvent<HTMLElement>) => {
    const listOfBalls = [...this.state.bouncyBalls];
    const differentSpeed = randomIntFromInterval(5, 300);
-   const addItem = {color:"white", speed:(differentSpeed), initX:(e.pageX), initY:(e.pageY)};
+   const differentAngle = randomIntFromInterval(2, 10);
+   const addItem = {color:"white", speed:(differentSpeed), initX:(e.pageX), initY:(e.pageY), angle: differentAngle};
    listOfBalls.push(addItem);
    this.setState({bouncyBalls: listOfBalls});
   }
